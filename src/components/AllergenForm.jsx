@@ -1,5 +1,6 @@
-import  { useState } from 'react';
-import "./AllergenForm.css";
+import { useState } from 'react';
+import emailjs from 'emailjs-com';
+import './AllergenForm.css';
 
 function AllergenForm() {
   const [formData, setFormData] = useState({
@@ -18,14 +19,37 @@ function AllergenForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const sendEmail = (e) => {
     e.preventDefault();
-    // Aquí se puede enviar la data a un servidor o manejar la información.
-    console.log('Form Data Submitted: ', formData);
+
+    // Aquí configuramos los parámetros para EmailJS
+    emailjs
+      .send(
+        'YOUR_SERVICE_ID', // Service ID
+        'YOUR_TEMPLATE_ID', // Template ID
+        {
+          allergenDefinition: formData.allergenDefinition,
+          top8Allergens: formData.top8Allergens,
+          allergensInFacility: formData.allergensInFacility,
+          allergyEffects: formData.allergyEffects,
+          minimizeAllergens: formData.minimizeAllergens,
+        },
+        'YOUR_USER_ID' // User ID
+      )
+      .then(
+        (result) => {
+          console.log('Email sent successfully!', result.text);
+          alert('Email sent successfully!');
+        },
+        (error) => {
+          console.log('Error sending email:', error.text);
+          alert('Failed to send email. Please try again.');
+        }
+      );
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={sendEmail}>
       <h2>Allergen Questionnaire</h2>
 
       <label>
@@ -73,7 +97,7 @@ function AllergenForm() {
       </label>
 
       <label>
-        5. What can we do at Yumi to minimize the effects of food allergens?
+        5. What can we do at Ymi to minimize the effects of food allergens?
         <textarea
           name="minimizeAllergens"
           value={formData.minimizeAllergens}
@@ -83,7 +107,7 @@ function AllergenForm() {
         />
       </label>
 
-      <button type="submit">Submit</button>
+      <button type="submit">Send Email</button>
     </form>
   );
 }
