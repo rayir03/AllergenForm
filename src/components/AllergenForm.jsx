@@ -9,6 +9,8 @@ function AllergenForm() {
     allergensInFacility: '',
     allergyEffects: '',
     minimizeAllergens: '',
+    cleaningMethods: '',
+
   });
 
   const handleChange = (e) => {
@@ -97,10 +99,21 @@ function AllergenForm() {
       </label>
 
       <label>
-        5. What can we do at Ymi to minimize the effects of food allergens?
+        5. What can we do at Yumi to minimize the effects of food allergens?
         <textarea
           name="minimizeAllergens"
           value={formData.minimizeAllergens}
+          onChange={handleChange}
+          placeholder="Provide suggestions to minimize allergen risks."
+          rows="4"
+        />
+      </label>
+
+      <label>
+        6. What 2 cleaning methods do we use for Allergen Control?
+        <textarea
+          name="cleaningMethods"
+          value={formData.cleaningMethods}
           onChange={handleChange}
           placeholder="Provide suggestions to minimize allergen risks."
           rows="4"
