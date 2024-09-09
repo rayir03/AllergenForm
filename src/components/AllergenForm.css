@@ -1,0 +1,74 @@
+/* styles.css */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 15px;
+    font-family: 'Arial', sans-serif;
+    color: #555;
+  }
+  
+  textarea,
+  input[type="number"] {
+    width: 95%;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    resize: none;
+    background-color: #fff;
+  }
+  
+  textarea:focus,
+  input[type="number"]:focus {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  @media (max-width: 768px) {
+    form {
+      padding: 15px;
+    }
+  
+    button {
+      font-size: 14px;
+    }
+  }
+  
