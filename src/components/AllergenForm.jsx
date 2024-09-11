@@ -66,7 +66,7 @@ function AllergenForm() {
     <form onSubmit={sendEmail} ref={componentRef}>
       <h2>Allergen Questionnaire</h2>
       <label>
-        Name:
+        First Name & Last Name:
         <input 
             name='name'
             type='text'
