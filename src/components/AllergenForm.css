@@ -34,7 +34,7 @@ form {
     resize: none;
     background-color: #fff;
   }
-  
+  input[type="text"]:focus,
   textarea:focus,
   input[type="number"]:focus {
     outline: none;
