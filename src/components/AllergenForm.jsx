@@ -1,15 +1,22 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import emailjs from 'emailjs-com';
+import {useReactToPrint} from 'react-to-print';
 import './AllergenForm.css';
 
 function AllergenForm() {
   const [formData, setFormData] = useState({
+    name: '',
     allergenDefinition: '',
     top8Allergens: '',
     allergensInFacility: '',
     allergyEffects: '',
     minimizeAllergens: '',
     cleaningMethods: '',
+    handwashing: '',
+    crossContamination: '',
+    trueFalseSpace: '',
+    trueFalseSegregation: '',
+
 
   });
 
@@ -20,6 +27,11 @@ function AllergenForm() {
       [name]: value,
     }));
   };
+
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -51,8 +63,18 @@ function AllergenForm() {
   };
 
   return (
-    <form onSubmit={sendEmail}>
+    <form onSubmit={sendEmail} ref={componentRef}>
       <h2>Allergen Questionnaire</h2>
+      <label>
+        Name:
+        <input 
+            name='name'
+            type='text'
+            value={formData.name}
+            onChange={handleChange}
+            placeholder='Provide your Name please'
+        />
+      </label>
 
       <label>
         1. What is an allergen?
@@ -120,7 +142,80 @@ function AllergenForm() {
         />
       </label>
 
+      <label>
+        7. Why is handwashing important ?
+        <textarea
+          name="handwashing"
+          value={formData.handwashing}
+          onChange={handleChange}
+          placeholder="Provide suggestions."
+          rows="4"
+        />
+      </label>
+
+      <label>
+        8. What is Cross Contamination ?
+        <textarea
+          name="crossContamination"
+          value={formData.crossContamination}
+          onChange={handleChange}
+          placeholder="Provide suggestions."
+          rows="4"
+        />
+      </label>
+      <label>
+        9. We have 3 case of Bagged Shrimp left in the freezer, it is Ok to stack these cases on a pallet of Ice Cream to save freezer space?
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="trueFalseSpace"
+          value={formData.trueFalseSpace}
+          onChange={handleChange}
+        />
+        True
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="trueFalseSpace"
+          value={formData.trueFalseSpace}
+          onChange={handleChange}
+        />
+        False
+      </label>
+      
+
+      <label>
+        10. All products within the freezer should be Kept segregated in order to prevent cross contamination.
+      </label>
+      <label>
+        
+        <label>
+        <input
+          type="radio"
+          name="trueFalseSegregation"
+          value={formData.trueFalseSegregation}
+          onChange={handleChange}
+        />
+        True
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="trueFalseSegregation"
+          value={formData.trueFalseSegregation}
+          onChange={handleChange}
+        />
+        False
+      </label>
+      </label>
+   
+
       <button type="submit">Send Email</button>
+      
+
+      <button type="button" onClick={handlePrint}>Print</button>
     </form>
   );
 }
